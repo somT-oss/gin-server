@@ -1,0 +1,96 @@
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+// type Payload struct {
+// 	language string `json:"language"`
+// 	sourceCode string `json:"source_code"`
+// }
+
+func stringifySourceCode(sourceCode string) (string, error) {
+	res, err := json.Marshal(sourceCode)
+	check(err)
+	return string(res), nil
+}
+
+func convertToRawString(jsonString string) (string, error) {
+	jsonString, err := strconv.Unquote(jsonString)
+	check(err)
+	return jsonString, nil
+}
+
+func writeContentToFile(fileContent string, fileType string) {
+	var fileExtension string
+	switch fileType {
+	case "python":
+		fileExtension = ".py"
+	default:
+		fileExtension = ".txt"
+	}
+	file, err := os.Create("testfile" + fileExtension)
+	check(err)
+
+	defer file.Close()
+
+	file.Write([]byte(fileContent))
+}
+
+
+// type SqsActions struct {
+// 	SqsClient *sqs.Client
+// }
+
+// func (actor SqsActions) GetMessages(ctx context.Context, queueUrl string, maxMessages int32, waitTime int32) {
+// 	var messages []types.Message
+// 	result, err := actor.SqsClient.ReceiveMessage(ctx, &sqs.ReceiveMessageInput {
+// 		QueueUrl: aws.String(queueUrl),
+// 		MaxNumberOfMessages: maxMessages,
+// 		WaitTimeSeconds: waitTime,
+// 	})
+
+// 	if err != nil {
+// 		log.Printf("Couldn't get messages from queue %v. Here's why: %v\n")
+// 	} else {
+// 		 messages = result.Messages
+// 	}
+
+// 	return messages, err
+// }
+
+// payload :=
+	// `def add(x, y):
+	// print(x+y)
+	// `
+	// sourceCode, err := stringifySourceCode(payload)
+	// check(err)
+	// jsonCode, err := convertToRawString(sourceCode)
+	// check(err)
+	// writeContentToFile(jsonCode, "python")
+	// fmt.Println(sourceCode)
+	// cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-east-1"))
+	// if err != nil {
+	// 	log.Fatalf("Unable to load the SDK config, %v", err)
+	// }
+
+	// client := sqs.NewFromConfig(cfg)
+	// sqsUrl := "https://sqs.us-east-1.amazonaws.com/590183701688/LeetcodeSubmissionQueue"
+	// resp, err := client.ReceiveMessage(context.TODO(), &sqs.ReceiveMessageInput{
+	// 	QueueUrl: &sqsUrl,
+	// 	MaxNumberOfMessages: 5,
+	// 	WaitTimeSeconds: 10,
+	// 	VisibilityTimeout: 30,
+	// })
+	// if err != nil {
+	// 	log.Fatalf("Failed to receive messages, %v", err)
+	// }
+
+	// if len(resp.Messages) == 0 {
+	// 	fmt.Println("No messages received")
+	// }
+
+	// for _, message := range resp.Messages {
+	// 	fmt.Printf("Message ID: %s \nBody: %s\n\n", *message.MessageId, *message.Body)
+	// 	fmt.Printf(stringifySourceCode(*message.Body))
+	// }
