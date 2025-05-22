@@ -43,6 +43,7 @@ func addAlbum(c *gin.Context) {
 	c.JSON(http.StatusOK, albums)
 }
 
+
 func printPostRequest(c *gin.Context) {
 	if c.ContentType() != "application/json" {
 		c.JSON(405, "Unsupported content type")
