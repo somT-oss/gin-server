@@ -3,3 +3,7 @@ testfile.py
 tescases.json
 testcases.json
 .env
+infra/.terraform
+infra/.terraform*
+infra/terraform*
+leetcode_server.pem
