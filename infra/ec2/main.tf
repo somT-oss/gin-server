@@ -96,6 +96,14 @@ resource "aws_security_group" "leetcode_server_sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+    # Allow HTTP connections to port 8080
+    ingress {
+        from_port = 8080
+        to_port = 8080
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
     # Allow all outbound traffic
     egress {
         from_port = 0
@@ -118,6 +126,7 @@ resource "aws_instance" "leetcode_server" {
     subnet_id = aws_subnet.leetcode_server_subnet_1.id
     vpc_security_group_ids = [aws_security_group.leetcode_server_sg.id]
     key_name = aws_key_pair.ssh_key_pair.key_name
+    iam_instance_profile = var.leetcode_server_instance_profile
 
     credit_specification {
         cpu_credits = "standard"

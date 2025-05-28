@@ -1,9 +1,11 @@
 content.txt
 testfile.py
 tescases.json
-testcases.json
 .env
 infra/.terraform
 infra/.terraform*
 infra/terraform*
 leetcode_server.pem
+run.py
+terraform*
+infra/ansible/inventory/inventory.ini

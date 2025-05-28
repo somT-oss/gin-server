@@ -1,0 +1,37 @@
+- name: Install Git and Go
+  hosts: webservers
+  become: true
+
+  tasks:
+  - name: Install Git
+    ansible.builtin.yum:
+      name: git
+
+  - name: Remove any previous installations of Go
+    ansible.builtin.shell: rm -rf /usr/local/go
+  
+  - name: Install Go v1.23.4
+    ansible.builtin.shell: wget https://go.dev/dl/go1.24.3.linux-386.tar.gz
+  
+  - name: Extract Go
+    ansible.builtin.shell: tar -C /usr/local -xzf go1.24.3.linux-386.tar.gz
+
+  - name: Add Go to path
+    shell: export PATH=$PATH:/usr/local/go/bin
+  
+  - name: Ensure Docker is installed
+    ansible.builtin.yum:
+      name: docker
+      state: latest
+
+
+  - name: Clone the repo into the server
+    shell: git clone https://github.com/somT-oss/gin-server.git
+  
+  - name: Compile Go app
+    shell: GOOS=linux GOARCH=amd64 go build -o main main.go
+    args:
+      chdir: gin-server
+      executable: /bin/bash  # make sure bash is used
+    environment:
+      PATH: "{{ ansible_env.PATH }}:/usr/local/go/bin"

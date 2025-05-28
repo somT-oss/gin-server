@@ -6,6 +6,9 @@ output "leetcode_server_id" {
     value = aws_instance.leetcode_server.id
 }
 
+output "leetcode_server_ip" {
+    value = aws_instance.leetcode_server.public_ip
+}
 output "leetcode_server_sg_id" {
     value = aws_security_group.leetcode_server_sg.id
 }

@@ -29,3 +29,7 @@ variable "instance_type" {
 variable "sg_name" {
     type = string
 }
+
+variable "leetcode_server_instance_profile" {
+    type = string
+}
