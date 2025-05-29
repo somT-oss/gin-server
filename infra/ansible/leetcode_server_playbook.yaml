@@ -23,11 +23,19 @@
     ansible.builtin.yum:
       name: docker
       state: latest
+  
+  - name: Add ec2-user to docker group
+    shell: usermod -aG docker ec2-user
 
+  - name: Start Docker daemon
+    shell: systemctl start docker
+
+  - name: Install python3 image in the server
+    shell: docker pull python:3
 
   - name: Clone the repo into the server
     shell: git clone https://github.com/somT-oss/gin-server.git
-  
+
   - name: Compile Go app
     shell: GOOS=linux GOARCH=amd64 go build -o main main.go
     args:
