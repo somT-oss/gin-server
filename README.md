@@ -34,15 +34,20 @@ The architecture of this application involves two main components, a server and 
 
 5. Run ```go run main.go``` to start up the local development server.
 
-To send a message to the queue, MAKE SURE to send a POST request to the ```/send/``` endpoint
-### JSON request body example
-```
-{
-    "source_code": "def two_sum(nums, target):\n    lookup = {}\n    for i, num in enumerate(nums):\n        if target - num in lookup:\n            return [lookup[target - num], i]\n        lookup[num] = i\n    return []",
-    "language": "python"
-}
-```
-**PS**: You can convert the code in source code to actual code and test it out in your code editor.
+## Endpoints:
+- POST ```/send```, takes a request body
+    ### JSON request body example
+    ```
+    {
+        "source_code": "def two_sum(nums, target):\n    lookup = {}\n    for i, num in enumerate(nums):\n        if target - num in lookup:\n            return [lookup[target - num], i]\n        lookup[num] = i\n    return []",
+        "language": "python"
+    }
+    ```
+    **PS**: You can convert the code in source code to actual code and test it out in your code editor.
+    
+    This endpoint returns the message_id of the message in the queue
+
+- GET ```/receive/<message_id>``` returns a success message if the code run successfully.
 
 
 ## Deploy to AWS
