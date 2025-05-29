@@ -34,12 +34,12 @@
     shell: docker pull python:3
 
   - name: Clone the repo into the server
-    shell: git clone https://github.com/somT-oss/gin-server.git
+    shell: git clone https://github.com/somT-oss/leetcode-two-sum-server.git
 
   - name: Compile Go app
     shell: GOOS=linux GOARCH=amd64 go build -o main main.go
     args:
-      chdir: gin-server
+      chdir: leetcode-two-sum-server
       executable: /bin/bash  # make sure bash is used
     environment:
       PATH: "{{ ansible_env.PATH }}:/usr/local/go/bin"
