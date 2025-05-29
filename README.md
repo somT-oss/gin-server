@@ -8,6 +8,8 @@ Leetcode code execution engine is an impressive system that parses user code sub
 ## Architecture
 The architecture of this application involves two main components, a server and a queue. An endpoint on the server is used to send source code and the language type to a queue service, in this case Amazon Simple Queue Service (SQS). The queue serves a buffer to hold code submissions. Another endpoint is used to read the message from the queue and process the code in the same server within a docker container.
 
+If the code executes properly and the docker container exits without an error exit_status code, a 200 status code is returned, otherwise a 400 status code is returned.
+
 
 ## Prerequisites
 - An AWS account
@@ -47,7 +49,7 @@ The architecture of this application involves two main components, a server and 
     
     This endpoint returns the message_id of the message in the queue
 
-- GET ```/receive/<message_id>``` returns a success message if the code run successfully.
+- GET ```/receive/<message_id>``` returns a success message if the code passes the tests in a docker container.
 
 
 ## Deploy to AWS
