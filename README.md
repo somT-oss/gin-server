@@ -21,7 +21,7 @@ The architecture of this application involves two main components, a server and 
 ## Local Testing
 1 Clone the repository.
 
-2 Run go mod install to install go dependencies.
+2 Run ```go mod download``` to install go dependencies.
 
 3 Create an SQS queue in AWS.
 
@@ -63,7 +63,7 @@ To send a message to the queue, MAKE SURE to send a POST request to the ```/send
 <ec2-user@ip_address>
 ``` 
 
-6 Run ```ansible-playbook ansible/leetcode_server_playbook.yaml -i ansible/inventory/inventory.ini --private-key leetcode_server.pem``` to install dependencies in the server
+6 Run ```ansible-playbook ansible/leetcode_server_playbook.yaml -i ansible/inventory/your_inventory.ini --private-key leetcode_server.pem``` to install dependencies in the server
 
 7 ssh into the server with ```ssh ec2-user@ip_address -i leetcode_server.pem```.
 
