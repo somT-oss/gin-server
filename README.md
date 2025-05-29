@@ -78,7 +78,7 @@ To send a message to the queue, MAKE SURE to send a POST request to the ```/send
 
 12. Run ```sudo chown -R ec2-user:ec2-user ~```. This changes the ownership of the directory to the current user in the server. This will help to create the files we need when we want to test the code.
 
-13. Run the server with "./main"
+13. Run the server with ```./main```
 
 14. Access the application on ```<ip_address>:8080/```
 
